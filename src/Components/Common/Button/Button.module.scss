@@ -1,0 +1,16 @@
+.button {
+    display: block;
+    padding: 10px 15px;
+    background-color: #4dd599;
+    border-radius: 4px;
+    width: 100%;
+    font-weight: 600;
+    color: #fff;
+    font-size: 14px;
+    line-height: 16px;
+    transition: background-color 0.2s linear;
+
+    &:hover {
+        background-color: darken(#4dd599, 30%);
+    }
+}

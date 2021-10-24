@@ -1,0 +1,86 @@
+.item {
+    position: relative;
+    padding: 11px 0 11px 32px;
+    cursor: pointer;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        left: 15px;
+        top: 15px;
+        z-index: 1;
+    }
+}
+.icon {
+    &::before {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url(../../assets/sidebar/all_tasks.svg);
+        left: 12px;
+        top: 11px;
+        z-index: 1;
+        border-radius: 0;
+    }
+}
+
+.blue {
+    &::before {
+        background-color: #64c4ed;
+    }
+}
+
+.green {
+    &::before {
+        background-color: #42b883;
+    }
+}
+
+.pink {
+    &::before {
+        background-color: #ffbbcc;
+    }
+}
+
+.darkGreen {
+    &::before {
+        background-color: #b6e6bd;
+    }
+}
+
+.purpur {
+    &::before {
+        background-color: #c9d1d3;
+    }
+}
+
+.red {
+    &::before {
+        background-color: red;
+    }
+}
+
+// ============================
+
+.active {
+    background-color: #fff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    &::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url(../../assets/sidebar/delete.svg);
+        right: 14px;
+        top: 14px;
+        z-index: 1;
+    }
+}

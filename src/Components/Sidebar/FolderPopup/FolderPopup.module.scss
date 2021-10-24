@@ -1,0 +1,38 @@
+.popup {
+    background-color: #fff;
+    width: 235px;
+    height: 148px;
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin-top: 5px;
+    position: absolute;
+    left: 28px;
+    top: 100%;
+    z-index: 1;
+    padding: 18px;
+    input {
+        padding: 7px 11px;
+        border: 1px solid #efefef;
+        border-radius: 4px;
+        font-weight: 600;
+        margin: 0 0 13px;
+        width: 100%;
+        &:focus {
+            border-color: #ccc;
+        }
+    }
+
+    &__colors {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 0 15px;
+    }
+}
+
+.close {
+    position: absolute;
+    right: -11px;
+    top: -10px;
+    z-index: 1;
+    cursor: pointer;
+}
