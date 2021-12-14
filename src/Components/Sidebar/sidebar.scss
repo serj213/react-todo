@@ -1,0 +1,10 @@
+.sidebar {
+    flex: 0 0 20%;
+    background-color: #f4f6f8;
+    min-height: 100%;
+    padding: 57px 20px;
+
+    &__top {
+        margin: 0 0 28px;
+    }
+}
