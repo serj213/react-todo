@@ -3,6 +3,7 @@
     align-items: center;
     padding: 10px 12px;
     background-color: transparent;
+    cursor: pointer;
 
     span {
         font-size: 14px;
@@ -14,5 +15,9 @@
 
     &__active {
         background-color: #fff;
+    }
+
+    &:hover{
+        background-color: rgba(#fff, .8);
     }
 }

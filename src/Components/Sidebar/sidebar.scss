@@ -7,4 +7,30 @@
     &__top {
         margin: 0 0 28px;
     }
+
+    &__middle {
+        margin: 0 0 27px;
+    }
+
+    &__bottom {
+        position: relative;
+    }
+
+    &__add-folder {
+        display: flex;
+        padding: 10px 11px;
+        background-color: transparent;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+        span {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: #767676;
+            margin-left: 10px;
+        }
+    }
 }
