@@ -10,6 +10,13 @@
     border-radius: 10px;
     padding: 19px;
 
+    &__close{
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        z-index: 1;
+    }
+
     input {
         font-weight: 500;
         font-size: 14px;

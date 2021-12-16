@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 // components
 
@@ -6,17 +7,21 @@ import Button from "../../Common/Button";
 import Badger from "../Badger";
 
 // styles
-
 import './addFolder.scss';
+
+// images
+
+import closeImg from '../../../assets/images/close.svg';
 
 
 const AddFolder = ({ colorsList,
     add,
+    hiddenPopup
 }) => {
 
     const [inputValue, setInputValue] = React.useState('');
-
     const [activeColor, setActiveColor] = React.useState(1);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     const changeActiveColor = id => {
         setActiveColor(id);
@@ -32,16 +37,24 @@ const AddFolder = ({ colorsList,
             alert('введите название');
             return
         }
+        setIsLoading(true);
 
-        add({ id: Math.random(), name: inputValue, colorId: activeColor })
+        axios.post('http://localhost:3001/lists', { id: Math.random(), name: inputValue, colorId: activeColor }).then(({ data }) => {
+            add(data);
+
+        });
+        setIsLoading(false);
+
         setInputValue('');
         setActiveColor(1);
-
     }
 
 
     return (
         <div className="popup">
+            <button onClick={hiddenPopup} className="popup__close">
+                <img src={closeImg} alt="" />
+            </button>
             <input value={inputValue} onChange={(e) => changeInputValue(e)} type="text" placeholder="Название папки" />
             <div className="popup__colors">
 
@@ -58,7 +71,11 @@ const AddFolder = ({ colorsList,
             </div>
 
             <Button addTask={addTaks}>
-                Добавить
+                {
+                    isLoading ? '...Добавляется' : 'Добавить'
+                }
+
+
             </Button>
         </div>
     )

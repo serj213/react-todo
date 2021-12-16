@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DB from '../../assets/db.json';
+import axios from "axios";
 
 // styles
 import './sidebar.scss';
@@ -16,25 +17,34 @@ import AddFolder from "./AddFolder";
 
 const Sidebar = () => {
 
-    const talksList = DB.lists;
+    const [addFolder, setAddFolder] = React.useState(false);
+    const [lists, setLists] = React.useState(null);
+    const [colors, setColors] = React.useState(null);
 
 
+    useEffect(() => {
+        axios.get('http://localhost:3001/lists').then(({ data }) => {
+            setLists(data);
+        });
 
+        axios.get('http://localhost:3001/colors').then(({ data }) => {
+            setColors(data);
+        });
 
-    const [addFolder, setAddFolder] = React.useState(true);
-    const [lists, setLists] = React.useState(DB.lists);
+        console.log('cайд эффект');
 
-    
+        
+    }, [])
 
-
-
+   
 
     const onShowPopup = () => {
         setAddFolder(true)
     }
 
-
-
+    const onHiddenPopup = () => {
+        setAddFolder(false);
+    }
 
     const allTalks = [
         {
@@ -44,17 +54,22 @@ const Sidebar = () => {
 
     ]
 
-
-
     const addTalk = obj => {
         const newList = [...lists, obj];
-        console.log(lists, newList);
-        setLists(newList);
+        // setLists(newList);
+        console.log(newList)
+        // setAddFolder(false);
     }
 
+    const onRemove = obj => {
 
+        if (window.confirm('действительно хотите удалить?')) {
+            const deleteList = obj.id;
+            console.log(obj.id);
+            // axios.delete('http://localhost:3001/lists/' + obj.id);
+        }
 
-
+    }
 
 
     return (
@@ -71,10 +86,13 @@ const Sidebar = () => {
 
             <div className="sidebar__middle">
                 {
-                    talksList.map((item, index) => {
+                    lists &&
+                    lists.map((item, index) => {
                         return <SidebarItem key={index}
                             name={item.name}
-                            color={DB.colors.filter(colorItem => item.colorId === colorItem.id)[0].name}
+                            color={colors && colors.filter(colorItem => item.colorId === colorItem.id)[0].name}
+                            isRemovable
+                            onRemove={() => onRemove(item)}
                         />
                     })
                 }
@@ -92,7 +110,8 @@ const Sidebar = () => {
                 {
                     addFolder && <AddFolder
                         add={addTalk}
-                        colorsList={DB.colors}
+                        colorsList={colors}
+                        hiddenPopup={onHiddenPopup}
                     />
                 }
 
