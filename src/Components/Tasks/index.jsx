@@ -9,19 +9,18 @@ import TaskItem from "./TaskItem";
 import './tasks.scss';
 
 
-const Tasks = () => {
-
+const Tasks = ({ lists }) => {
 
     return (
         <div className="tasks">
             <div className="tasks__title">
-                <input type="text" value='фронтенд' />
+                <input type="text" value={lists[0].name} />
             </div>
 
             <div className="tasks__list tasks-list">
 
                 <TaskItem />
-                
+
             </div>
 
         </div>

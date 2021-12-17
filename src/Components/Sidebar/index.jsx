@@ -14,30 +14,11 @@ import iconImg from '../../assets/images/icon.svg';
 import addIcon from '../../assets/images/add.svg';
 import AddFolder from "./AddFolder";
 
-const Sidebar = () => {
+const Sidebar = ({lists, setLists, colors, setColors}) => {
 
     const [addFolder, setAddFolder] = React.useState(false);
-    const [lists, setLists] = React.useState(null);
-    const [colors, setColors] = React.useState(null);
-
-
-
-    React.useEffect(() => {
-
-        axios.get('http://localhost:3001/lists').then(({ data }) => {
-            setLists(data);
-        })
-
-        axios.get('http://localhost:3001/colors').then(({ data }) => {
-            setColors(data);
-        })
-        console.log('юз эффект');
-    }, []);
-
-
-
-
-
+ 
+    
     const onShowPopup = () => {
         setAddFolder(true);
 

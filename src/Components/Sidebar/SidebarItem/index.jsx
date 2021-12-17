@@ -12,7 +12,10 @@ import removeImg from '../../../assets/images/remove.svg';
 
 
 
-const SidebarItem = ({ active = false, icon, name, color = false, isRemovable = false, onRemove }) => {
+const SidebarItem = ({ active = false, icon, name, color = false, isRemovable = false, onRemove, tasksCount = [], lists = false }) => {
+
+    console.log(tasksCount.length);
+
 
 
     return (
@@ -22,6 +25,12 @@ const SidebarItem = ({ active = false, icon, name, color = false, isRemovable = 
                 color && <Badger color={color} />
             }
             <span>{name}</span>
+            <span>
+                {
+                    lists ?
+                        '(' + tasksCount.length + ')' : ''
+                }
+            </span>
 
             {
                 isRemovable && <button onClick={onRemove} className="itemSidebar__remove">
