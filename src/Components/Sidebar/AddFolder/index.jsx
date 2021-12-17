@@ -39,10 +39,14 @@ const AddFolder = ({ colorsList,
         }
         setIsLoading(true);
 
-        axios.post('http://localhost:3001/lists', { id: Math.random(), name: inputValue, colorId: activeColor }).then(({ data }) => {
-            add(data);
+        axios.post('http://localhost:3001/lists', {
+            name: inputValue,
+            colorId: activeColor
+        })
+            .then(({ data }) => {
+                add(data);
 
-        });
+            });
         setIsLoading(false);
 
         setInputValue('');
@@ -55,10 +59,12 @@ const AddFolder = ({ colorsList,
             <button onClick={hiddenPopup} className="popup__close">
                 <img src={closeImg} alt="" />
             </button>
+
             <input value={inputValue} onChange={(e) => changeInputValue(e)} type="text" placeholder="Название папки" />
             <div className="popup__colors">
 
                 {
+                    colorsList &&
                     colorsList.map(colorItem => {
                         return <Badger key={colorItem.id}
                             active={activeColor === colorItem.id && true}

@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import DB from '../../assets/db.json';
+import React from "react";
 import axios from "axios";
 
 // styles
@@ -8,7 +7,7 @@ import './sidebar.scss';
 //components
 
 import SidebarItem from "./SidebarItem";
-
+import ListsMiddle from "./ListsMiddle";
 // images
 
 import iconImg from '../../assets/images/icon.svg';
@@ -22,24 +21,26 @@ const Sidebar = () => {
     const [colors, setColors] = React.useState(null);
 
 
-    useEffect(() => {
+
+    React.useEffect(() => {
+
         axios.get('http://localhost:3001/lists').then(({ data }) => {
             setLists(data);
-        });
+        })
 
         axios.get('http://localhost:3001/colors').then(({ data }) => {
             setColors(data);
-        });
+        })
+        console.log('юз эффект');
+    }, []);
 
-        console.log('cайд эффект');
 
-        
-    }, [])
 
-   
+
 
     const onShowPopup = () => {
-        setAddFolder(true)
+        setAddFolder(true);
+
     }
 
     const onHiddenPopup = () => {
@@ -56,24 +57,22 @@ const Sidebar = () => {
 
     const addTalk = obj => {
         const newList = [...lists, obj];
-        // setLists(newList);
-        console.log(newList)
-        // setAddFolder(false);
+        setLists(newList);
+        setAddFolder(false);
     }
 
     const onRemove = obj => {
 
         if (window.confirm('действительно хотите удалить?')) {
             const deleteList = obj.id;
-            console.log(obj.id);
-            // axios.delete('http://localhost:3001/lists/' + obj.id);
+            axios.delete('http://localhost:3001/lists/' + obj.id);
+            const newList = lists.filter(item => item.id !== obj.id);
+            setLists(newList);
         }
 
     }
 
-
     return (
-
         <aside className="sidebar">
             <div className="sidebar__top">
                 {
@@ -85,28 +84,18 @@ const Sidebar = () => {
 
 
             <div className="sidebar__middle">
-                {
-                    lists &&
-                    lists.map((item, index) => {
-                        return <SidebarItem key={index}
-                            name={item.name}
-                            color={colors && colors.filter(colorItem => item.colorId === colorItem.id)[0].name}
-                            isRemovable
-                            onRemove={() => onRemove(item)}
-                        />
-                    })
-                }
+
+                <ListsMiddle lists={lists} colors={colors} onRemove={onRemove} />
+
             </div>
 
             <div className="sidebar__bottom">
-
                 <button onClick={onShowPopup} className="sidebar__add-folder">
                     <img src={addIcon} alt="" />
                     <span>
                         Добавить папку
                     </span>
                 </button>
-
                 {
                     addFolder && <AddFolder
                         add={addTalk}
@@ -114,10 +103,7 @@ const Sidebar = () => {
                         hiddenPopup={onHiddenPopup}
                     />
                 }
-
             </div>
-
-
         </aside>
     )
 }
