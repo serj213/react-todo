@@ -4,9 +4,10 @@ import './listsMiddle.scss';
 import SidebarItem from "../SidebarItem";
 
 
-const ListsMiddle = ({ lists, colors, onRemove }) => {
+const ListsMiddle = ({ lists, colors, onRemove, clickItem }) => {
 
-    console.log('dfdf');
+  
+
     return (
         <>
 
@@ -14,13 +15,12 @@ const ListsMiddle = ({ lists, colors, onRemove }) => {
                 lists.map((item, index) => {
                     return <SidebarItem key={item.id}
                         tasksCount={item.tasks}
-                        items={item}
+                        ClickItems={() => clickItem(item)}
                         name={item.name}
                         color={colors && colors.filter(colorItem => item.colorId === colorItem.id)[0].name}
                         isRemovable
                         onRemove={() => onRemove(item)}
                         lists
-
                     />
                 })}
         </>

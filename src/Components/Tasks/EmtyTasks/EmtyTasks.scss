@@ -1,0 +1,14 @@
+.empty {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 250px 0 0;
+    height: 100%;
+
+    span {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 39px;
+        color: #c9d1d3;
+    }
+}

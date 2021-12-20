@@ -14,7 +14,7 @@ import iconImg from '../../assets/images/icon.svg';
 import addIcon from '../../assets/images/add.svg';
 import AddFolder from "./AddFolder";
 
-const Sidebar = ({lists, setLists, colors, setColors}) => {
+const Sidebar = ({lists, setLists, colors, clickItem }) => {
 
     const [addFolder, setAddFolder] = React.useState(false);
  
@@ -66,7 +66,7 @@ const Sidebar = ({lists, setLists, colors, setColors}) => {
 
             <div className="sidebar__middle">
 
-                <ListsMiddle lists={lists} colors={colors} onRemove={onRemove} />
+                <ListsMiddle clickItem={clickItem} lists={lists} colors={colors} onRemove={onRemove} />
 
             </div>
 

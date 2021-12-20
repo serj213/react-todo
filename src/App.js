@@ -10,6 +10,7 @@ const App = () => {
 
   const [lists, setLists] = React.useState(null);
   const [colors, setColors] = React.useState(null);
+  const [selectedList, setSelectedList] = React.useState(null);
 
   React.useEffect(() => {
 
@@ -23,6 +24,25 @@ const App = () => {
 
   }, []);
 
+  const editTitle = (name, id) => {
+
+    const newList = lists.map(item => {
+
+      if (item.id === id) {
+        item.name = name;
+      }
+
+      return item;
+    });
+    
+    setLists(newList);
+
+  }
+
+  const clickItem = (item) => {
+    setSelectedList(item);
+  }
+
 
   return (
     <div>
@@ -31,9 +51,13 @@ const App = () => {
           lists={lists}
           colors={colors}
           setLists={setLists}
-          setColors={setColors} />
+          setColors={setColors}
+          clickItem={clickItem}
+        />
         {
           lists && <Tasks lists={lists}
+            selectedList={selectedList}
+            editTitle={(name, id) => editTitle(name, id)}
           />
         }
       </Layout>

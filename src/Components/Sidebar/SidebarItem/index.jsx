@@ -12,14 +12,18 @@ import removeImg from '../../../assets/images/remove.svg';
 
 
 
-const SidebarItem = ({ active = false, icon, name, color = false, isRemovable = false, onRemove, tasksCount = [], lists = false }) => {
-
-    console.log(tasksCount.length);
-
-
+const SidebarItem = ({ active = false, 
+    icon, name, 
+    color = false,
+     isRemovable = false,
+     onRemove,
+     tasksCount = [],
+     lists = false ,
+     ClickItems
+    }) => {
 
     return (
-        <div className={`itemSidebar ${active && 'itemSidebar__active'}`}>
+        <div onClick={ClickItems} className={`itemSidebar ${active && 'itemSidebar__active'}`}>
             {icon && <img src={iconImg} alt="" />}
             {
                 color && <Badger color={color} />
