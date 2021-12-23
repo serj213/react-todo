@@ -34,7 +34,7 @@ const App = () => {
 
       return item;
     });
-    
+
     setLists(newList);
 
   }
@@ -43,6 +43,26 @@ const App = () => {
     setSelectedList(item);
   }
 
+  const addTaks = (tasksObj, listId) => {
+
+  
+
+    const newTasks = lists.map(item => {
+
+      if (item.id === listId) {
+
+        item.tasks = [...item.tasks, tasksObj];
+      }
+
+      return item;
+
+    });
+
+    setLists(newTasks); 
+
+ 
+
+  }
 
   return (
     <div>
@@ -58,6 +78,7 @@ const App = () => {
           lists && <Tasks lists={lists}
             selectedList={selectedList}
             editTitle={(name, id) => editTitle(name, id)}
+            addTaks={addTaks}
           />
         }
       </Layout>

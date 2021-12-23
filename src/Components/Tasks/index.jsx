@@ -16,9 +16,14 @@ import editIcon from '../../assets/images/edit.svg';
 import TasksAdd from "./TasksAdd";
 
 
-const Tasks = ({ selectedList, editTitle }) => {
+const Tasks = ({ selectedList, editTitle, addTaks }) => {
 
     const [taskPopup, setTaskPopup] = React.useState(false);
+    const [inputValueTask, setInputValueTask] = React.useState('');
+
+    const changeInput = e => {
+        setInputValueTask(e.target.value);
+    }
 
 
     const showTaskPopup = () => {
@@ -28,8 +33,6 @@ const Tasks = ({ selectedList, editTitle }) => {
     const hiddenTaskPopup = () => {
         setTaskPopup(false);
     }
-
-
 
     const onEditTitle = () => {
 
@@ -46,8 +49,32 @@ const Tasks = ({ selectedList, editTitle }) => {
                 alert('Не удалось отправить');
             })
         }
+    }
 
+    const taskAdd = () => {
 
+        const newObj = {
+            listId: selectedList.id,
+            text: inputValueTask,
+            completed: false,
+        };
+
+        axios.post('http://localhost:3001/tasks/' ,  {
+            listId: selectedList.id,
+            text: inputValueTask,
+            completed: false,
+        })
+
+        .then(()=> {
+            addTaks(newObj, selectedList.id);
+        })
+        
+        .catch(() => {
+            alert('не удалось выполнить запрос');
+
+        });
+
+        
     }
 
 
@@ -82,6 +109,9 @@ const Tasks = ({ selectedList, editTitle }) => {
                                 hiddenTaskPopup={hiddenTaskPopup}
                                 taskPopup={taskPopup}
                                 visibleTaskPopup={showTaskPopup}
+                                changeInput={changeInput}
+                                input={inputValueTask}
+                                add={taskAdd}
                             />
                         </div>
 
