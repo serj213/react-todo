@@ -16,7 +16,7 @@ import editIcon from '../../assets/images/edit.svg';
 import TasksAdd from "./TasksAdd";
 
 
-const Tasks = ({ selectedList, editTitle, addTaks }) => {
+const Tasks = ({ selectedList, editTitle, addTaks, lists, setLists }) => {
 
     const [taskPopup, setTaskPopup] = React.useState(false);
     const [inputValueTask, setInputValueTask] = React.useState('');
@@ -59,22 +59,43 @@ const Tasks = ({ selectedList, editTitle, addTaks }) => {
             completed: false,
         };
 
-        axios.post('http://localhost:3001/tasks/' ,  {
+        axios.post('http://localhost:3001/tasks/', {
             listId: selectedList.id,
             text: inputValueTask,
             completed: false,
         })
 
-        .then(()=> {
-            addTaks(newObj, selectedList.id);
-        })
-        
+            .then(() => {
+                addTaks(newObj, selectedList.id);
+            })
+
+            .catch(() => {
+                alert('не удалось выполнить запрос');
+
+            });
+
+    }
+
+    const taskRemove = (obj) => {
+
+        axios.delete('http://localhost:3001/tasks/' +  obj.id)
         .catch(() => {
             alert('не удалось выполнить запрос');
-
         });
 
-        
+        const newList = lists.map(item => {
+            
+            if(item.id === selectedList.id){
+                const tasksItem = item.tasks;
+                const newTasksList = tasksItem.filter(objTask => objTask.id !== obj.id);
+                item.tasks = newTasksList;
+            }
+
+            return item;
+        });
+
+        setLists(newList);
+
     }
 
 
@@ -98,6 +119,7 @@ const Tasks = ({ selectedList, editTitle, addTaks }) => {
                                 selectedList.tasks.map(item => {
                                     return <TaskItem key={item.id}
                                         taskText={item.text}
+                                        taskRemove={() => taskRemove(item)}
 
                                     />
                                 })

@@ -1,8 +1,15 @@
 .task-item {
+    position: relative;
     display: flex;
     align-items: center;
     margin: 0 0 20px;
+    max-width: 50%;
 
+    &:hover{
+        .task-item__remove{
+            opacity: .2;
+        }
+    }
     &:last-child {
         margin: 0;
     }
@@ -41,5 +48,18 @@
         font-size: 16px;
         line-height: 19px;
         color: #000;
+    }
+
+    &__remove{
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 1 !important;
+        }
     }
 }

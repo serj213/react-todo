@@ -24,6 +24,11 @@
       "id": 5,
       "name": "Личное",
       "colorId": 1
+    },
+    {
+      "name": "вавава",
+      "colorId": 5,
+      "id": 6
     }
   ],
   "tasks": [
@@ -88,8 +93,8 @@
       "id": 10
     },
     {
-      "listId": 4,
-      "text": "dfdf",
+      "listId": 1,
+      "text": "выполнит  план в 500 продаж",
       "completed": false,
       "id": 11
     },
@@ -98,6 +103,12 @@
       "text": "dfdf",
       "completed": false,
       "id": 12
+    },
+    {
+      "listId": 4,
+      "text": "dfsfsdf",
+      "completed": false,
+      "id": 13
     }
   ],
   "colors": [

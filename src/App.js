@@ -43,10 +43,9 @@ const App = () => {
     setSelectedList(item);
   }
 
+
+
   const addTaks = (tasksObj, listId) => {
-
-  
-
     const newTasks = lists.map(item => {
 
       if (item.id === listId) {
@@ -59,10 +58,15 @@ const App = () => {
     });
 
     setLists(newTasks); 
-
- 
-
   }
+
+  const RemoveTask = (tasksObj, listId) => {
+
+    
+  }
+
+
+
 
   return (
     <div>
@@ -79,6 +83,8 @@ const App = () => {
             selectedList={selectedList}
             editTitle={(name, id) => editTitle(name, id)}
             addTaks={addTaks}
+            RemoveTask={RemoveTask}
+            setLists={setLists}
           />
         }
       </Layout>
